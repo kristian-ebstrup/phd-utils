@@ -1,7 +1,4 @@
 # utils
 A collection of simple utility scripts and useful one-liners related to my PhD studies.
 
-It might be relevant to add the `utils` directories to the `PATH` environment for easier access:
-```
-PATH=$PATH:$HOME/git/utils/postprocessing
-```
+Easy-access is handled using aliases, and is kept up-to-date in my `.bash_aliases.sh[my configs repository](https://github.com/kristian-ebstrup/configs).
