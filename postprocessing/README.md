@@ -32,7 +32,7 @@ PARAVIEW="$HOME/ParaView-5.11.0-MPI-Linux-Python3.9-x86_64/bin/paraview"
 ...
 ```
 
-Note that if you're using PyEllipsys, `rst2pv` does not support the postprocessor compiled as an object `postprocessor.o`.
+Note that if you're using PyEllipsys, `rst2pv` does not support shared objects `.so`, so make sure the postprocessor is compiled as a binary.
 
 For easy access, an alias (or more specifically, a function to allow passing of flags) can be set-up to avoid having to drag the script around. As an example, add the following to your `.bashrc` or `.bash_aliases` files:
 ```bash
