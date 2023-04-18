@@ -1,5 +1,5 @@
-#!/usr/bin/Aenv python
-# Simple script to generate a .p3d file for input in ParaView
+#!/usr/bin/env python
+# Small script to generate a .p3d file for input in ParaView
 # Author: Kristian Ebstrup
 # Email: kreb@dtu.dk
 from glob import glob
