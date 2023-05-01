@@ -77,6 +77,7 @@ flag_postprocess=false
 flag_generate_p3d=false
 flag_paraview=false
 flag_paraview_script=false
+flag_timeseries=false
 
 # flag handling
 while getopts "pgvs:" opt; do
@@ -109,11 +110,16 @@ while getopts "pgvs:" opt; do
         exit
       fi
       ;;
+    t )
+      echo "Timeseries enabled; will look for .RST.0?.*"
+      flag_timeseries=true
     ? ) 
-      echo "script usage: $(basename $0) [-p] [-g] [-v], where" >&2
+      echo "script usage: $(basename $0) [-p] [-g] [-v] [-s], where" >&2
       echo "    -p    enables post-processing of restart files"
       echo "    -g    enables .p3d generation using generate_p3d.py"
+      echo "    -t    enables timeseries"
       echo "    -v    enables visualization in ParaView"
+      echo "    -s    enables visualization in ParaView via script"
       exit 1
       ;;
   esac
@@ -145,21 +151,26 @@ if $flag_postprocess; then
   PATH_T2D="./grid.T2D"
   echo "Looking for grid.X2D and grid.T2D in current folder..."
   if [ -f "$PATH_X2D" ]; then
-    echo "Found grid.X2D!"
+    echo "Found grid.X2D"
   else
-    echo "Didn't find grid.X2D. Terminating!"
+    echo "Didn't find grid.X2D. Terminating"
     exit
   fi
   if [ -f "$PATH_T2D" ]; then
-    echo "Found grid.T2D!"
+    echo "Found grid.T2D"
   else
-    echo "Didn't find grid.T2D. Terminating!"
+    echo "Didn't find grid.T2D. Terminating"
     exit
   fi
 
   # get filelist
-  echo "Getting list of restart files with extensions..."
-  files=`ls ./grid.RST.*.*`
+  if $flag_timeseries; then
+    echo "Getting list of restart files matching pattern ./grid.RST.0?.* ..."
+    files=`ls ./grid.RST.0?.*`
+  else
+    echo "Getting list of restart files matching pattern ./grid.RST.0?.* ..."
+    files=`ls ./grid.RST.0?`
+  fi
 
   # save default Internal Field Separator to allow string splitting
   _IFS=$IFS
