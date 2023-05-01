@@ -113,6 +113,7 @@ while getopts "pgvs:" opt; do
     t )
       echo "Timeseries enabled; will look for .RST.0?.*"
       flag_timeseries=true
+      ;;
     ? ) 
       echo "script usage: $(basename $0) [-p] [-g] [-v] [-s], where" >&2
       echo "    -p    enables post-processing of restart files"
