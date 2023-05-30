@@ -32,7 +32,7 @@ function generate_p3d {
 from glob import glob
 
 # resulting filename
-p3dname: str = "timeseries.p3d"
+p3dname: str = "meta.p3d"
 
 # get list of .f-files and .xyz-files
 f = sorted(glob("*.f"))
@@ -80,7 +80,7 @@ flag_paraview_script=false
 flag_timeseries=false
 
 # flag handling
-while getopts "pgvs:" opt; do
+while getopts "pgvs:t" opt; do
   case $opt in
     p )
       echo "Enabled post-processing of restart files"
@@ -169,7 +169,7 @@ if $flag_postprocess; then
     echo "Getting list of restart files matching pattern ./grid.RST.0?.* ..."
     files=`ls ./grid.RST.0?.*`
   else
-    echo "Getting list of restart files matching pattern ./grid.RST.0?.* ..."
+    echo "Getting list of restart files matching pattern ./grid.RST.0? ..."
     files=`ls ./grid.RST.0?`
   fi
 
@@ -209,10 +209,10 @@ fi
 # P3D GENERATION
 # ============================================ #
 if $flag_generate_p3d; then
-  echo "Preparing .p3d file with timeseries (timeseries.p3d)..." 
+  echo "Preparing .p3d meta-file (meta.p3d)..." 
   # embedded python script for portability; identical to generate_p3d.py
   generate_p3d
-  echo "Timeseries ready."
+  echo "Meta-file ready."
 fi
 
 # ============================================ #
@@ -231,7 +231,7 @@ if $flag_paraview; then
     $PARAVIEW --script=${PARAVIEW_SCRIPT_PATH}
   else
     echo "Loading without script ..."
-    $PARAVIEW timeseries.p3d
+    $PARAVIEW meta.p3d
   fi
 fi
 
