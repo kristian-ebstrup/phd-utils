@@ -3,8 +3,8 @@ General scripts used for varying post-processing purposes saved here for posteri
 
 # EllipSys
 - `rst2pv.sh`
-  - All-in-one script for going from EllipSys2D restart files to a `.p3d`-metafile for timeseries-animating in Paraview.
-  - **Dependencies**: None. `generate_p3d.py` is embedded in the script for portability.
+  - All-in-one script for going from EllipSys2D restart files to a `.p3d`-metafile for timeseries-animating in Paraview. `generate_p3d.py` is embedded for portability, and thus not required.
+  - **Dependencies**: A compiled EllipSys2D postprocessor, and ParaView if visualization is desired.
   - [Simple tutorial for set-up and use found here](#rst2pv).
 - `generate_p3d.py`
   - Generates a `.p3d`-metafile using all `grid_*.f` and `grid_*.nam` (i.e. post-processed) files.
@@ -51,11 +51,12 @@ in the terminal.
 
 
 ### Options
-`rst2pv` supports four different flags:
+`rst2pv` supports five different flags:
 
 | Flag | Name | Description |
 | ---- | ---- | ----------- |
 | `-p` | postprocess | enables post-processing of the `grid.RST` files. |
 | `-g` | generate | enables the generation of the `.p3d` meta-file needed for ParaView.
+| `-t` | temporal | sets the postprocessing to look for `grid.RST.0?.*` files |
 | `-v` | visualize | enables starting up ParaView and loading the `.p3d` meta-file. |
 | `-s` | script | enables starting up ParaView using a ParaView Python script (e.g. generated using the `Trace` option). Requires the script to be in the same folder as `rst2pv.sh`. If an invalid script is given, a list of all scripts with format `pv_*.py` are given. |
