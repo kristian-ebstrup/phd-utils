@@ -6,5 +6,5 @@
 # ============================================ #
 read -p "Input string to replace 'grid': " replacer
 for file in grid.*; do 
-    mv "$file" "${file/grid/replacer}"
+    mv "$file" "${file/grid/$replacer}"
 done
