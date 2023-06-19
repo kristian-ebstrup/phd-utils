@@ -7,9 +7,10 @@
 # Email: kreb@dtu.dk
 # ============================================ #
 echo "Warning! You are about to delete your EllipSys result files!"
-read -p "==> PLEASE CONFIRM \[y/N\]: " yes_or_no
+read -p "==> PLEASE CONFIRM [y/N]: " yes_or_no
 yes_or_no=${yes_or_no:-n}
-if ${yes_or_no,,}.eq.("y") then
+if [ ${yes_or_no,,} == "y" ] 
+then
     echo "Deleting grid.?force ..."
     rm grid.?force
     echo "Deleting grid.?pr ..."
@@ -23,3 +24,4 @@ if ${yes_or_no,,}.eq.("y") then
     echo "Done"
 else
     echo "Cancelled deletion."
+fi
